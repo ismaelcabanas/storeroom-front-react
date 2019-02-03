@@ -17,7 +17,20 @@ describe('Products', () => {
     const result = await page.evaluate(() => {
       return document.querySelector('h1').innerText
     })
+    
     expect(result).toEqual('Storeroom Products')
+  })
+
+  test('Product List', async () => {
+    await page.goto(`${appUrlBase}/`)
+    await page.waitForSelector('.products')
+    const products = await page.evaluate(() => {
+        return [...document.querySelectorAll('.product .title')].map(el => el.innerText)    
+    })
+
+    expect(products.length).toEqual(2)
+    expect(products[0]).toEqual('Manzana')
+    expect(products[1]).toEqual('Leche')
   })
 })
 
