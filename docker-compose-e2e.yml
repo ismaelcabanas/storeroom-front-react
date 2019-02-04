@@ -1,0 +1,9 @@
+version: '3.4'
+services:
+  backend-mock-server:
+    image: clue/json-server
+    working_dir: /data
+    ports:
+      - '8080:80'
+    volumes:
+      - ./data:/data
