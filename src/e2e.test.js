@@ -53,8 +53,8 @@ describe('Products', () => {
         })
 
         expect(products.length).toEqual(2)
-        expect(products[0]).toEqual('Manzana')
-        expect(products[1]).toEqual('Leche')
+        expect(products).toContain('Manzana')
+        expect(products).toContain('Leche')
     })
 
     afterEach(() => {
