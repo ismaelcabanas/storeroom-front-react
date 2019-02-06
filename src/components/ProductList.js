@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
 class ProductList extends Component {
-  constructor(props) {
-    super(props)    
-  }
   
   render () {        
     if(this.props.loading) {
