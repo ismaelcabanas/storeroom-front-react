@@ -6,7 +6,9 @@ class ProductListContainer extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            products: []
+            products: [], 
+            loading: true,
+            error: null
         }
     }
 
@@ -14,7 +16,13 @@ class ProductListContainer extends Component {
         axios.get('http://localhost:8080/products')
           .then(res => {
             this.setState({
-              products: res.data
+              products: res.data,
+              loading: false
+            })
+        }).catch(err => {
+            this.setState({
+                loading: false,
+                error: err
             })
         })
     }
