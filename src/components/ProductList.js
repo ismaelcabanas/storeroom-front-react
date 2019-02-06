@@ -9,6 +9,9 @@ class ProductList extends Component {
     if(this.props.loading) {
       return (<div className="loading" />)
     }
+    if(this.props.error) {
+      return (<div className="error" />)
+    }
     return (      
       <div className="products">
       {
