@@ -12,10 +12,11 @@ class ProductList extends Component {
     return (      
       <div className="products">
       {
-        this.props.products.map((product, index) => {
+        this.props.products.map(product => {
           return (
-            <div key={index} className="product">
+            <div key={product.id} className="product">
               <h2 className="title">{product.name}</h2>
+                <a href={`/products/${product.id}`} className="view-detail">View detail</a>
             </div>
           )
         })
