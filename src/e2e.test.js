@@ -57,6 +57,23 @@ describe('Products', () => {
         expect(products).toContain('Leche')
     })
 
+    test('Go to the detail product page', async () => {
+        await page.goto(`${appUrlBase}/`)
+        await page.waitForSelector('a.view-detail')
+
+        const links = await page.evaluate(() => {
+            return [...document.querySelectorAll('a.view-detail')].map(el => el.getAttribute('href'))
+        })
+
+        await Promise.all([
+            page.waitForNavigation({waitUntil: 'networkidle2'}),
+            page.goto(`${appUrlBase}${links[0]}`)
+        ])
+
+        const url = await page.evaluate('location.href')
+        expect(url).toEqual(`${appUrlBase}/products/6ee88e09-8b8a-44c4-b8b3-9ba8e759284d`)
+    })
+
     afterEach(() => {
         return axios.delete('http://localhost:8080/storerooms/dc3143d7-7731-4532-a5e6-b35e7149350f')
             .catch(err => err)
