@@ -72,6 +72,12 @@ describe('Products', () => {
 
         const url = await page.evaluate('location.href')
         expect(url).toEqual(`${appUrlBase}/products/6ee88e09-8b8a-44c4-b8b3-9ba8e759284d`)
+
+        await page.waitForSelector('.name')
+        const result = await page.evaluate(() => {
+            return document.querySelector('.name').innerText
+        })
+        expect(result).toEqual('Manzana')
     })
 
     afterEach(() => {
