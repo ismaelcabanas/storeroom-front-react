@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ProductList from './ProductList';
+import ProductList from '../components/ProductList/index';
 import axios from 'axios';
 
 class ProductListContainer extends Component {
