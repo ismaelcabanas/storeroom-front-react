@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import ProductDetail from './ProductDetail';
 
-class ProductEditContainer extends Component {
+class ProductDetailContainer extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -20,13 +21,10 @@ class ProductEditContainer extends Component {
     }
     
     render() {
-        const {product} = this.state
         return (
-            <div className="detail">
-                <div className="name">{product.name}</div>    
-            </div>
+            <ProductDetail {...this.state} />
         )
     }
 }
 
-export default ProductEditContainer;
+export default ProductDetailContainer;
