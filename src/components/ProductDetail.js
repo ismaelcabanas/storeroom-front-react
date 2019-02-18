@@ -6,7 +6,8 @@ class ProductDetail extends Component {
         const {product} = this.props
         return (
             <div className="detail">
-                <div className="name">{product.name}</div>    
+                <div className="name">{product.name}</div> 
+                <div className="stock">{product.stock}</div>  
             </div>
         )
     }

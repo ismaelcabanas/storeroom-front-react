@@ -19,4 +19,17 @@ describe("ProductDetail", () => {
         expect(wrapper.find('.name').text()).toEqual('Manzana')
     })
 
+    it('Shows product stock', () => {
+        const props = {
+            product: {
+                name: "Manzana",
+                stock: 5
+            }
+        }
+        
+        const wrapper = shallow(<ProductDetail {... props} />)
+
+        expect(wrapper.find('.stock').text()).toEqual('5')
+    })
+
 })
