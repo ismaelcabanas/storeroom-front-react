@@ -7,7 +7,7 @@ import {Route} from 'react-router-dom';
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="container">
         <h1>Storeroom Products</h1>
         <main>
           <Route exact path="/" component={ProductListContainer} />
