@@ -10,6 +10,7 @@ class ProductListContainer extends Component {
             loading: true,
             error: null
         }
+        this.filterProduct = this.filterProduct.bind(this)
     }
 
     componentDidMount() {
@@ -26,10 +27,33 @@ class ProductListContainer extends Component {
             })
         })
     }
+
+    filterProduct(e) {
+        this.setState({
+            term: e.target.value
+        })
+
+        axios.get(`http://localhost:8080/products?q=${e.target.value}`)
+          .then(res => {
+            this.setState({
+              products: res.data,
+              loading: false
+            })
+        }).catch(err => {
+            this.setState({
+                loading: false,
+                error: err
+            })
+        })
+    }
     
     render() {
         return (
-            <ProductList {... this.state} />
+            <div>
+                <input type="text" className="search" placeholder="Type to search" 
+                    onChange={this.filterProduct} value={this.state.term}/>
+                <ProductList {... this.state} />
+            </div>
         )
     }
 }

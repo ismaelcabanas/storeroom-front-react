@@ -3,11 +3,16 @@ import axios from 'axios';
 
 const appUrlBase = 'http://localhost:3000'
 
+const puppeteerConfig = {
+    headless: true, // launch headful mode
+    slowMo: 100, // slow down puppeteer script so that it's easier to follow visually
+  };
+
 let browser
 let page
 
 beforeAll(async () => {
-  browser = await puppeteer.launch({})
+  browser = await puppeteer.launch(puppeteerConfig)
   page = await browser.newPage()
 })
 
@@ -83,8 +88,8 @@ describe('Products', () => {
     test('Show products which name contains keyword', async () => {
         await page.goto(`${appUrlBase}/`)
 
-        const input = await page.waitForSelector('input.search')
-        page.type('input.search', 'man')
+        await page.waitForSelector('input.search')
+        page.type('input.search', 'Man')
 
         await page.waitForSelector('.product .title')
         const products = await page.evaluate(() => {
