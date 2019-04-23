@@ -80,6 +80,21 @@ describe('Products', () => {
         expect(result).toEqual('Manzana')
     })
 
+    test('Show products which name contains keyword', async () => {
+        await page.goto(`${appUrlBase}/`)
+
+        const input = await page.waitForSelector('input.search')
+        page.type('input.search', 'man')
+
+        await page.waitForSelector('.product .title')
+        const products = await page.evaluate(() => {
+            return [...document.querySelectorAll('.product .title')].map(el => el.innerText)    
+        })
+
+        expect(products.length).toEqual(1)
+        expect(products[0]).toEqual('Manzana')
+    })
+
     afterEach(() => {
         return axios.delete('http://localhost:8080/storerooms/dc3143d7-7731-4532-a5e6-b35e7149350f')
             .catch(err => err)
