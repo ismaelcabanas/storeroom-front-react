@@ -8,13 +8,19 @@ class ProductListContainer extends Component {
         this.state = {
             products: [], 
             loading: true,
-            error: null
+            error: null,
+            term: ''
         }
         this.filterProduct = this.filterProduct.bind(this)
     }
 
     componentDidMount() {
-        axios.get('http://localhost:8080/products')
+        this.fetchProducts()
+    }
+
+    fetchProducts() {
+        const {term} = this.state
+        axios.get(`http://localhost:8080/products?q=${term}`)
           .then(res => {
             this.setState({
               products: res.data,
@@ -31,20 +37,7 @@ class ProductListContainer extends Component {
     filterProduct(e) {
         this.setState({
             term: e.target.value
-        })
-
-        axios.get(`http://localhost:8080/products?q=${e.target.value}`)
-          .then(res => {
-            this.setState({
-              products: res.data,
-              loading: false
-            })
-        }).catch(err => {
-            this.setState({
-                loading: false,
-                error: err
-            })
-        })
+        }, this.fetchProducts)
     }
     
     render() {
