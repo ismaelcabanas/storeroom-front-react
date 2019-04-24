@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import ProductDetail from '../components/ProductDetail/index';
+import ProductDetail from '../../components/ProductDetail';
 
 class ProductDetailContainer extends Component {
     constructor(props) {

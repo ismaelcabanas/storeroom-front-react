@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import ProductListContainer from './containers/ProductListContainer';
-import ProductDetailContainer from './containers/ProductDetailContainer';
+import ProductListContainer from './containers/ProductListContainer/';
+import ProductDetailContainer from './containers/ProductDetailContainer/';
 import {Route} from 'react-router-dom';
 
 class App extends Component {
