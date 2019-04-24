@@ -17,7 +17,7 @@ class ProductList extends Component {
           return (
             <div key={product.id} className="product">
               <h2 className="title">{product.name}</h2>
-                <a href={`/products/${product.id}`} className="view-detail">View detail</a>
+              <a href={`/products/${product.id}`} className="view-detail">View detail</a>
             </div>
           )
         })
