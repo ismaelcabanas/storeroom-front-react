@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import ProductList from '../components/ProductList/index';
-import SearchBox from '../components/SearchBox/index';
+import ProductList from '../../components/ProductList';
+import SearchBox from '../../components/SearchBox';
 import axios from 'axios';
 
 class ProductListContainer extends Component {
