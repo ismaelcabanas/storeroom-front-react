@@ -1,4 +1,4 @@
-import {fetchProducts} from './actions';
+import {setSearchTerm} from './actions';
 
 describe('ProductListContainer related actions', () => {
     it('Set search keyword', () => {
