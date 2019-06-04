@@ -9,6 +9,8 @@ export const fetchProducts = () => {
       dispatch({type: 'FETCH_PRODUCTS_PENDING'})
       return axios.get(`http://localhost:8080/storeroom/1/products`).then((res) => {
         dispatch({type: 'FETCH_PRODUCTS_SUCCESS', payload: res.data})
+      }).catch((err) => {
+          dispatch({type: 'FETCH_PRODUCTS_FAILED', payload: {message: err.message}})
       })
     }
   }
