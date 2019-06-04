@@ -5,9 +5,10 @@ export const setSearchTerm = (term) => {
 }
 
 export const fetchProducts = () => {
-    return (dispatch) => {
+    return (dispatch, getState) => {
       dispatch({type: 'FETCH_PRODUCTS_PENDING'})
-      return axios.get(`http://localhost:8080/storeroom/1/products`).then((res) => {
+      const state = getState()
+      return axios.get(`http://localhost:8080/storeroom/1/products?q=${state.search.term || ''}`).then((res) => {
         dispatch({type: 'FETCH_PRODUCTS_SUCCESS', payload: res.data})
       }).catch((err) => {
           dispatch({type: 'FETCH_PRODUCTS_FAILED', payload: {message: err.message}})
