@@ -1,4 +1,12 @@
-import {setSearchTerm} from './action'
+import {setSearchTerm, fetchProducts} from './action'
+
+import configureMockStore from 'redux-mock-store'
+import thunk from 'redux-thunk'
+
+import axios from 'axios'
+
+const middlewares = [thunk]
+const mockStore = configureMockStore(middlewares)
 
 describe('ProductListContainer related actions', () => {
     it('Set search keyword', () => {
@@ -11,5 +19,24 @@ describe('ProductListContainer related actions', () => {
       expect(action).toEqual(expected)
     })
   
+    describe('Fetching data from remote', () => {
+        it('Fetch data successfully', () => {
+            const products = [
+              {id: 1, name: 'Manzanas'},
+              {id: 2, name: 'Leche'}
+            ]
+            axios.get = jest.fn().mockImplementation(() => Promise.resolve({data: products}))
+      
+            const expectedActions = [
+              { type: 'FETCH_PRODUCTS_PENDING'},
+              { type: 'FETCH_PRODUCTS_SUCCESS', payload: products }
+            ]
+            const store = mockStore({products: [], search: { term: '' } })
+      
+            return store.dispatch(fetchProducts()).then(() => {
+              expect(store.getActions()).toEqual(expectedActions)
+            })
+          })
+    })
 
 })
