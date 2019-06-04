@@ -5,6 +5,8 @@ import thunk from 'redux-thunk'
 
 import axios from 'axios'
 
+import * as types from './types'
+
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 
@@ -12,7 +14,7 @@ describe('ProductListContainer related actions', () => {
     it('Set search keyword', () => {
       const term = ''
       const expected = {
-        type: 'SET_SEARCH_TERM',
+        type: types.SET_SEARCH_TERM,
         payload: {term}
       }
       const action = setSearchTerm(term)
@@ -28,8 +30,8 @@ describe('ProductListContainer related actions', () => {
             axios.get = jest.fn().mockImplementation(() => Promise.resolve({data: products}))
       
             const expectedActions = [
-              { type: 'FETCH_PRODUCTS_PENDING'},
-              { type: 'FETCH_PRODUCTS_SUCCESS', payload: products }
+              { type: types.FETCH_PRODUCTS_PENDING},
+              { type: types.FETCH_PRODUCTS_SUCCESS, payload: products }
             ]
             const store = mockStore({products: [], search: { term: '' } })
       
@@ -42,8 +44,8 @@ describe('ProductListContainer related actions', () => {
             axios.get = jest.fn().mockImplementation(() => Promise.reject({message: 'Something went wrong'}))
       
             const expectedActions = [
-              { type: 'FETCH_PRODUCTS_PENDING'},
-              { type: 'FETCH_PRODUCTS_FAILED', payload: {message: 'Something went wrong' }}
+              { type: types.FETCH_PRODUCTS_PENDING},
+              { type: types.FETCH_PRODUCTS_FAILED, payload: {message: 'Something went wrong' }}
             ]
             const store = mockStore({products: [], search: {term: '' }})
       
