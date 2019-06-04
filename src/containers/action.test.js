@@ -51,6 +51,20 @@ describe('ProductListContainer related actions', () => {
               expect(store.getActions()).toEqual(expectedActions)
             })
         })
+
+        it('Search data with term in state', () => {
+            const products = [
+              {id: 1, name: 'Manzana'},
+              {id: 2, name: 'Leche'}
+            ]
+            axios.get = jest.fn().mockImplementation(() => Promise.resolve({data: products}))
+      
+            const store = mockStore({products: [], search: {term: 'manz' }})
+      
+            return store.dispatch(fetchProducts('')).then(() => {
+              expect(axios.get).toHaveBeenCalledWith('http://localhost:8080/storeroom/1/products?q=manz')
+            })
+        })
     })
 
 })
