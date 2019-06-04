@@ -36,7 +36,21 @@ describe('ProductListContainer related actions', () => {
             return store.dispatch(fetchProducts()).then(() => {
               expect(store.getActions()).toEqual(expectedActions)
             })
-          })
+        })
+
+        it('Fetch data with error', () => {
+            axios.get = jest.fn().mockImplementation(() => Promise.reject({message: 'Something went wrong'}))
+      
+            const expectedActions = [
+              { type: 'FETCH_PRODUCTS_PENDING'},
+              { type: 'FETCH_PRODUCTS_FAILED', payload: {message: 'Something went wrong' }}
+            ]
+            const store = mockStore({products: [], search: {term: '' }})
+      
+            return store.dispatch(fetchProducts()).then(() => {
+              expect(store.getActions()).toEqual(expectedActions)
+            })
+        })
     })
 
 })
