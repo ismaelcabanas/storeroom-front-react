@@ -1,3 +1,3 @@
 export const setSearchTerm = (term) => {
-    return {type: 'FETCH_PRODUCTS', term}
+    return {type: 'SET_SEARCH_TERM', payload: {term}}
 }

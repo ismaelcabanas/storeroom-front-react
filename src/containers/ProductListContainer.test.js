@@ -5,7 +5,7 @@ describe('ProductListContainer related actions', () => {
         const term = ''
         const expected = {
             type: 'SET_TERM_SEARCH',
-            term
+            payload: term
         }
         const action = setSearchTerm(term)
 
