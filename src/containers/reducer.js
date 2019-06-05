@@ -11,6 +11,10 @@ export default (state = initialState, action) => {
                 ...state,
                 term: action.term
             }
+        case types.FETCH_PRODUCTS_PENDING:
+            return {
+                loading: true            
+            }
         default:
             return state
     }

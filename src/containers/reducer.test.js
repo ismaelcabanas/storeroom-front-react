@@ -10,4 +10,13 @@ describe('Reducer', () => {
 
         expect(state.term).toEqual('manz')
     })
+
+    it('Show loading when request is sent', () => {
+        const initState = {loading: false}
+        const action = {type: types.FETCH_PRODUCTS_PENDING}
+
+        const state = reducer(initState, action)
+
+        expect(state.loading).toBeTruthy()
+    })
 })
